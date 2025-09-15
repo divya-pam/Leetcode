@@ -1,0 +1,38 @@
+class Solution:
+
+    #solution 1
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = set()
+        nums.sort()
+        for i in range(len(nums)):
+            j=i+1
+            k=len(nums)-1
+            while j<k:
+                if nums[i]+nums[j]+nums[k] == 0:
+                    result = [nums[i], nums[j], nums[k]]
+                    res.add(tuple(result)) 
+                j+=1
+                k-=1
+        return list(res)
+
+        #solution 2
+        res = set()
+        dp = {}
+        for i in range(len(nums)):
+            for j in range(i+1,len(nums)):
+                if -(nums[i] + nums[j]) in dp:
+                    result = [nums[i], nums[j], -(nums[i]+nums[j])]
+                    res.add(tuple(result))
+            dp[nums[i]] = 1
+        return list(res)
+
+        #solution 3
+        for i in range(len(nums)):
+            for j in range(i+1,len(nums)):
+                for k in range(j+1, len(nums)):
+                    if nums[i]+nums[j]+nums[k] == 0:
+                        result = [nums[i], nums[j], nums[k]]
+                        result.sort()
+                        res.add(tuple(result))
+        return list(res)
+cr
